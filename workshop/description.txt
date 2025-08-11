@@ -1,0 +1,39 @@
+[h1]Space Crusade – Digital Tabletop Adaptation[/h1]
+
+Step into the grimdark universe of the 41st millennium with [b]Space Crusade[/b], now reimagined for [b]Tabletop Simulator[/b]. Command squads of fearless [b]Space Marines[/b] - choose from the stalwart [b]Blood Angels[/b], disciplined [b]Ultramarines[/b], or resilient [b]Imperial Fists[/b] - and launch tactical assaults aboard an alien-infested [b]space hulk[/b].
+
+Fierce creatures like [b]Orks[/b], [b]Genestealers[/b], [b]Chaos Marines[/b], and [b]Androids[/b] stand in your way, while one player takes on the role of the alien adversary, thwarting the mission with cunning strategy and relentless pressure.
+
+[h2]=== FEATURES ===[/h2]
+
+[list]
+[*][b]Mission-based gameplay[/b] – Faithfully recreates the modular board and dynamic scenarios of the original game.
+[*][b]30 base missions[/b] + [b]3 missions from the expansion "Mission: Dreadnought"[/b], stored in a [b]Utility Memory Bag[/b] for quick one-click placement.
+[*]Additional units from [i]White Dwarf[/i] magazine – [b]Scouts[/b], [b]Terminators[/b], and [b]Librarians[/b] add more tactical depth.
+[*][b]Three game mats[/b] – Space Marines, Orks, and Eldars, allowing varied and thematic battles.
+[*]Immersive sci-fi atmosphere, with streamlined mechanics rooted in the expansive [i]Warhammer 40,000[/i] lore.
+[*]Classic miniatures and components brought to life in digital form, enhancing tactical immersion and fast-paced gameplay.
+[/list]
+
+Bring your campaign to life and relive the classic cooperative and strategic thrills. Are you ready to reclaim the hulk... or will the alien forces crush the crusade?
+
+[h2]=== CREDITS AND THANKS ===[/h2]
+
+Content was obtained from the following workshop items:
+
+[list]
+[*] [url=https://steamcommunity.com/sharedfiles/filedetails/?id=1314995431]Space Crusade Complet [FR] by Groule[/url]
+[*] [url=https://steamcommunity.com/sharedfiles/filedetails/?id=1663035287]Space Crusade / StarQuest - English by Melon Pumpkinhead[/url]
+[*] [url=https://steamcommunity.com/sharedfiles/filedetails/?id=2057376256]Utility Memory Bag by directsun[/url]
+[*] [url=https://steamcommunity.com/sharedfiles/filedetails/?id=1108731141]Click Roller Universal by MrStump[/url]
+[/list]
+
+[h2]=== RESOURCES ===[/h2]
+
+[list]
+[*] [url=https://steamcommunity.com/sharedfiles/filedetails/?id=1314995431] Some assets and a copy of the savegame on GitHub[/url]
+[/list]
+
+[h2]=== COPYRIGHT & ATTRIBUTION ===[/h2]
+
+This mod is based on the original [b]Space Crusade[/b] board game, first published in 1990 as a collaboration between [b]Milton Bradley (MB UK)[/b] and [b]Games Workshop[/b], designed by [b]Steven Baker[/b]. All intellectual property and trademarks belong to their respective rights holders. This digital adaptation is [b]non-commercial[/b] and made with respect for the legacy and creativity of the original work.
