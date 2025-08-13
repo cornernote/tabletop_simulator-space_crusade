@@ -19,13 +19,15 @@ Bring your campaign to life and relive the classic cooperative and strategic thr
 
 [h2]=== CREDITS AND THANKS ===[/h2]
 
-Content was obtained from the following workshop items:
+Content was obtained from the following resources:
 
 [list]
 [*] [url=https://steamcommunity.com/sharedfiles/filedetails/?id=1314995431]Space Crusade Complet [FR] by Groule[/url]
 [*] [url=https://steamcommunity.com/sharedfiles/filedetails/?id=1663035287]Space Crusade / StarQuest - English by Melon Pumpkinhead[/url]
 [*] [url=https://steamcommunity.com/sharedfiles/filedetails/?id=2057376256]Utility Memory Bag by directsun[/url]
 [*] [url=https://steamcommunity.com/sharedfiles/filedetails/?id=1108731141]Click Roller Universal by MrStump[/url]
+[*] [url=https://www.eso.org/public/images/eso0932a/]Background image The Milky Way panorama from ESO/S. Brunier[/url]
+[*] [url=https://e1.pxfuel.com/desktop-wallpaper/92/802/desktop-wallpaper-warhammer-40k-war-hammer-titan.jpg]Alien Token Mat Image[/url]
 [/list]
 
 [h2]=== RESOURCES ===[/h2]
