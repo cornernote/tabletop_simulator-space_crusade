@@ -13,18 +13,18 @@ setting.setup = false
 --How far from the center of the device the dice are spawned
 setting.radius = 2
 --How wide of an arch the dice are placed on, in degrees (1-360)
-setting.arc = 120
+setting.arc = 360
 --Where center of the arc is around the tool is placed (0=bottom, 180=top)
 setting.rotation = 180
 --Height above tool die is spawned
-setting.height = 1.5
+setting.height = 3
 --Scaling factor for die being spawned (1 is normal, 0.5 is 1/2 size, 2 is 2x)
 setting.scale = 0.45
 
 --Maximum dice that can be spawned by this tool (-1 is infinite)
 setting.maxCount = 10
 --Delay (seconds) after a click that the roll is done (0.5 or more)
-setting.rollDelay = 1.2
+setting.rollDelay = 1.5
 --Time before dice are cleaned up (0 is instant, -1 won't clean them)
 setting.cleanupDelay = 5
 
