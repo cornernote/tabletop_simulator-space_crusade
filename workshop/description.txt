@@ -49,6 +49,7 @@ Content was obtained from the following resources:
 [*] [url=https://steamcommunity.com/sharedfiles/filedetails/?id=345020732]Epic Heresy: Knights and Titans by Gatorboii[/url]
 [*] [url=https://steamcommunity.com/sharedfiles/filedetails/?id=3138821727]Better Notebooks/Notepads by NightStorm[/url]
 [*] [url=https://steamcommunity.com/sharedfiles/filedetails/?id=2454472719]DnD Tools (Mini Injector) by by ColColonCleaner[/url]
+[*] [url=https://steamcommunity.com/sharedfiles/filedetails/?id=1964954970]Battlefield Terrain Pack 5 by Orange Blue Hue[/url]
 [*] [url=https://www.eso.org/public/images/eso0932a/]Background image The Milky Way panorama from ESO/S. Brunier[/url]
 [*] [url=https://e1.pxfuel.com/desktop-wallpaper/92/802/desktop-wallpaper-warhammer-40k-war-hammer-titan.jpg]Alien Token Mat Image[/url]
 [/list]
@@ -57,6 +58,7 @@ Content was obtained from the following resources:
 
 [list]
 [*] [url=https://steamcommunity.com/sharedfiles/filedetails/?id=948287591]Starry Sky - Particle system by ulia[/url] - use Additive load to get animated star background
+[*] [url=https://steamcommunity.com/sharedfiles/filedetails/?id=2779150680]Giant Spaceships with Interiors! by Potato[/url] - fun toys to play with
 [/list]
 
 [h2]=== RESOURCES ===[/h2]
