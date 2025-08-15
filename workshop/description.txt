@@ -1,21 +1,38 @@
 [h1]Space Crusade – Digital Tabletop Adaptation[/h1]
 
-Step into the grimdark universe of the 41st millennium with [b]Space Crusade[/b], now reimagined for [b]Tabletop Simulator[/b]. Command squads of fearless [b]Space Marines[/b] - choose from the stalwart [b]Blood Angels[/b], disciplined [b]Ultramarines[/b], or resilient [b]Imperial Fists[/b] - and launch tactical assaults aboard an alien-infested [b]space hulk[/b].
+Step into the grimdark universe of [b]Space Crusade[/b], now reimagined for [b]Tabletop Simulator[/b]. Command squads of fearless [b]Space Marines[/b] - choose from the stalwart [b]Blood Angels[/b], disciplined [b]Ultramarines[/b], or resilient [b]Imperial Fists[/b] - and launch tactical assaults aboard an alien-infested [b]space hulk[/b].
 
 Fierce creatures like [b]Orks[/b], [b]Genestealers[/b], [b]Chaos Marines[/b], and [b]Androids[/b] stand in your way, while one player takes on the role of the alien adversary, thwarting the mission with cunning strategy and relentless pressure.
 
-[h2]=== FEATURES ===[/h2]
+[h2]=== GAME FEATURES ===[/h2]
 
 [list]
 [*][b]Mission-based gameplay[/b] – Faithfully recreates the modular board and dynamic scenarios of the original game.
-[*][b]12 base missions[/b] + [b]3 missions from the expansion "Mission: Dreadnought"[/b], stored in a [b]Utility Memory Bag[/b] for quick one-click placement.
-[*]Additional units from [i]White Dwarf[/i] magazine – [b]Scouts[/b], [b]Terminators[/b], and [b]Librarians[/b] add more tactical depth.
-[*][b]Three game mats[/b] – Space Marines, Orks, and Eldars, allowing varied and thematic battles.
-[*]Immersive sci-fi atmosphere, with streamlined mechanics rooted in the expansive [i]Warhammer 40,000[/i] lore.
+[*] Both game expansions [b]Mission: Dreadnought[/b] and[b]Eldar Attack[/b].
+[*]Additional units from [i]White Dwarf[/i] magazine – [b]Scouts[/b], [b]Terminators[/b], [b]Librarians[/b] and [b]Tyranids and Hybrids[/b] add more tactical depth.
+[*][b]Three playmats[/b] – Space Marines, Orks, and Eldars, allowing varied and thematic battles.
 [*]Classic miniatures and components brought to life in digital form, enhancing tactical immersion and fast-paced gameplay.
 [/list]
 
 Bring your campaign to life and relive the classic cooperative and strategic thrills. Are you ready to reclaim the hulk... or will the alien forces crush the crusade?
+
+[h2]=== INCLUDED MISSIONS ===[/h2]
+
+All missions are pre-setup and stored in a [b]Memory Bag[/b] for quick one-click placement.
+
+[*][b]12 base missions[/b]
+[*][b]3 missions from the expansion "Mission: Dreadnought"[/b].
+[*][b]4 missions from the expansion "Eldar Attack"[/b].
+[*][b]New Mission Kit[/b] to easily create new missions.
+
+
+[h2]=== TABLETOP FEATURES ===[/h2]
+
+[list]
+[*][b]Move counters[/b] to show how far your units travelled.
+[*][b]Automatic dice rollers[/b] for quick game play.
+[*][b]Camera display[/b] which provides a mini-map on each player's console.
+[/list]
 
 [h2]=== CREDITS AND THANKS ===[/h2]
 
@@ -31,7 +48,7 @@ Content was obtained from the following resources:
 [*] [url=https://steamcommunity.com/sharedfiles/filedetails/?id=2042684905]Holo Table V.2 by Sonnolo[/url]
 [*] [url=https://steamcommunity.com/sharedfiles/filedetails/?id=345020732]Epic Heresy: Knights and Titans by Gatorboii[/url]
 [*] [url=https://steamcommunity.com/sharedfiles/filedetails/?id=3138821727]Better Notebooks/Notepads by NightStorm[/url]
-
+[*] [url=https://steamcommunity.com/sharedfiles/filedetails/?id=2454472719]DnD Tools (Mini Injector) by by ColColonCleaner[/url]
 [*] [url=https://www.eso.org/public/images/eso0932a/]Background image The Milky Way panorama from ESO/S. Brunier[/url]
 [*] [url=https://e1.pxfuel.com/desktop-wallpaper/92/802/desktop-wallpaper-warhammer-40k-war-hammer-titan.jpg]Alien Token Mat Image[/url]
 [/list]
