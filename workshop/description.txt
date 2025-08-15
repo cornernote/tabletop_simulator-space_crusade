@@ -20,11 +20,12 @@ Bring your campaign to life and relive the classic cooperative and strategic thr
 
 All missions are pre-setup and stored in a [b]Memory Bag[/b] for quick one-click placement.
 
+[list]
 [*][b]12 base missions[/b]
 [*][b]3 missions from the expansion "Mission: Dreadnought"[/b].
 [*][b]4 missions from the expansion "Eldar Attack"[/b].
 [*][b]New Mission Kit[/b] to easily create new missions.
-
+[/list]
 
 [h2]=== TABLETOP FEATURES ===[/h2]
 
@@ -41,12 +42,12 @@ Content was obtained from the following resources:
 [list]
 [*] [url=https://steamcommunity.com/sharedfiles/filedetails/?id=1314995431]Space Crusade Complet [FR] by Groule[/url]
 [*] [url=https://steamcommunity.com/sharedfiles/filedetails/?id=1663035287]Space Crusade / StarQuest - English by Melon Pumpkinhead[/url]
-[*] [url=https://steamcommunity.com/sharedfiles/filedetails/?id=2387870445] by pyokster[/url]
+[*] [url=https://steamcommunity.com/sharedfiles/filedetails/?id=2387870445]Space Crusade Ultimate Table by pyokster[/url]
 [*] [url=https://steamcommunity.com/sharedfiles/filedetails/?id=2057376256]Utility Memory Bag by directsun[/url]
 [*] [url=https://steamcommunity.com/sharedfiles/filedetails/?id=2271387270]Angelic Deployment Bag by MoonkeyMod[/url]
 [*] [url=https://steamcommunity.com/sharedfiles/filedetails/?id=1108731141]Click Roller Universal by MrStump[/url]
 [*] [url=https://steamcommunity.com/sharedfiles/filedetails/?id=2042684905]Holo Table V.2 by Sonnolo[/url]
-[*] [url=https://steamcommunity.com/sharedfiles/filedetails/?id=345020732]Epic Heresy: Knights and Titans by Gatorboii[/url]
+[*] [url=https://steamcommunity.com/sharedfiles/filedetails/?id=3450207327]Epic Heresy: Knights and Titans by Gatorboii[/url]
 [*] [url=https://steamcommunity.com/sharedfiles/filedetails/?id=3138821727]Better Notebooks/Notepads by NightStorm[/url]
 [*] [url=https://steamcommunity.com/sharedfiles/filedetails/?id=2454472719]DnD Tools (Mini Injector) by by ColColonCleaner[/url]
 [*] [url=https://steamcommunity.com/sharedfiles/filedetails/?id=1964954970]Battlefield Terrain Pack 5 by Orange Blue Hue[/url]
@@ -54,7 +55,7 @@ Content was obtained from the following resources:
 [*] [url=https://e1.pxfuel.com/desktop-wallpaper/92/802/desktop-wallpaper-warhammer-40k-war-hammer-titan.jpg]Alien Token Mat Image[/url]
 [/list]
 
-[h2]=== RECOMMENDED MODS ===[/h2]
+[h2]=== COMPATIBLE MODS ===[/h2]
 
 [list]
 [*] [url=https://steamcommunity.com/sharedfiles/filedetails/?id=948287591]Starry Sky - Particle system by ulia[/url] - use Additive load to get animated star background
