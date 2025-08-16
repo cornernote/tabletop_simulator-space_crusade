@@ -1,7 +1,7 @@
 {
   "SaveName": "Space Crusade - Holotable",
-  "EpochTime": 1755374421,
-  "Date": "8/17/2025 5:30:21 AM",
+  "EpochTime": 1755374599,
+  "Date": "8/17/2025 5:33:19 AM",
   "VersionNumber": "v13.3",
   "GameMode": "Custom",
   "GameType": "",
@@ -20827,19 +20827,19 @@
         "Order": 0
       },
       "LuaScript": "-- Utility memory bag by Directsun\r\n-- Version 2.7.0\r\n-- Fork of Memory Bag 2.0 by MrStump\r\n-- cornernote added animations\r\n--\r\n-- Want to contribute? Create an issue or fork the code on GitHub and submit a pull request:\r\n-- https://github.com/sunflowermans/TTS-UtilityMemoryBag\r\n\r\nCONFIG = {\r\n    MEMORY_GROUP = {\r\n        -- This determines how many frames to wait before actually placing objects onto the table when the \"Place\" button is clicked.\r\n        -- This gives the other bags time to recall their objects.\r\n        -- The delay ONLY occurs if other bags have objects out.\r\n        FRAME_DELAY_BEFORE_PLACING_OBJECTS = 180,\r\n    },\r\n}\r\n\r\n\r\n--[[ Memory Bag Groups ]]-------------------------------------------------------\r\n--[[\r\nUtility Memory Bags may be added to a named group, called a \"memory group\".\r\nYou can add a bag to a group through the bag's UI: \"Setup\" > \"Group Name\" (to the left of the bag).\r\nOnly one bag from a group may have it's contents placed on the table at a time.\r\nWhen \"Place\" is clicked on a bag, the other bags in it's memory group are recalled.\r\nBy default a memory bag is not in any group. It's memory group is \"nil\".\r\n--]]\r\n\r\nmemoryGroupName = {memoryBag=self}\r\nfunction memoryGroupName:get()\r\n    return self._name\r\nend\r\nfunction memoryGroupName:set(newName)\r\n    GlobalMemoryGroups:unregisterBagInGroup(self:get(), self.memoryBag.getGUID())\r\n    GlobalMemoryGroups:registerBagInGroup(newName, self.memoryBag.getGUID())\r\n\r\n    if newName == \"\" then\r\n        self._name = nil\r\n    else\r\n        self._name = newName\r\n    end\r\nend\r\n\r\n-- Click the \"Recall\" button on all other bags in my memory group.\r\nfunction recallOtherBagsInMyGroup()\r\n    for _,bag in ipairs(getOtherBagsInMyGroup()) do\r\n        bag.call('buttonClick_recall')\r\n    end\r\nend\r\n\r\n-- Return \"true\" if another bag in my memory group has any objects out on the table.\r\nfunction anyOtherBagsInMyGroupArePlaced()\r\n    for _,bag in ipairs(getOtherBagsInMyGroup()) do\r\n        local state = bag.call('areAnyOfMyObjectsPlaced')\r\n        if state then return true end\r\n    end\r\n\r\n    return false\r\nend\r\n\r\n-- Return \"true\" if at least one object from this memory bag is out on the table.\r\nfunction areAnyOfMyObjectsPlaced()\r\n    for guid,_ in pairs(memoryList) do\r\n        local obj = getObjectFromGUID(guid)\r\n        if obj ~= nil then\r\n            return true\r\n        end\r\n    end\r\n    return false\r\nend\r\n\r\nfunction getOtherBagsInMyGroup()\r\n    local bags = {}\r\n    for bagGuid,_ in pairs(GlobalMemoryGroups:getGroup(memoryGroupName:get())) do\r\n        if bagGuid ~= self.getGUID() then\r\n            bag = getObjectFromGUID(bagGuid)\r\n            -- \"bag\" is nill if it has been deleted since the last time onLoad() was called.\r\n            if bag ~= nil then\r\n                table.insert(bags, bag)\r\n            end\r\n        end\r\n    end\r\n    return bags\r\nend\r\n\r\n\r\n--[[\r\nThis object provides access to a variable stored on the \"Global script\".\r\nThe variable holds the names & guids of all memory bag groups.\r\nThe global variable is a table and holds data like this:\r\n{\r\n    'My First Group Name' = {\r\n        '805ebd' = {},\r\n        '35cc21' = {},\r\n        'fc8886' = {},\r\n    },\r\n    'My Second Group Name' = {\r\n        'f50264' = {},\r\n        '5f5f63' = {},\r\n    },\r\n}\r\n--]]\r\nGlobalMemoryGroups = {\r\n    NAME_OF_GLOBAL_VARIABLE = '_GlobalUtilityMemoryBagGroups',\r\n}\r\n\r\n-- Call me inside this script's \"onLoad()\" method!\r\nfunction GlobalMemoryGroups:onLoad(myGuid)\r\n    -- Create and initialize the global variable if it doesn't already exist:\r\n    if self:_getGroups() == nil then\r\n        self:_setGroups({})\r\n    end\r\nend\r\n\r\n-- Return the GUIDs of all bags in the \"groupName\". The return value is a dictionary that maps [GUID -> empty table].\r\nfunction GlobalMemoryGroups:getGroup(groupName)\r\n    guids = self:_getGroups()[groupName] or {}\r\n    return guids\r\nend\r\n\r\n-- Registers a bag in a memory group. Creates a new group if one doesn't exist.\r\nfunction GlobalMemoryGroups:registerBagInGroup(groupName, bagGuid)\r\n    if groupName == nil or groupName == \"\" then\r\n        return\r\n    end\r\n\r\n    self:_tryCreateNewGroup(groupName)\r\n    local groups = self:_getGroups()\r\n    groups[groupName][bagGuid] = {}\r\n    self:_setGroups(groups)\r\nend\r\n\r\n-- Removes this bag from the memory group.\r\nfunction GlobalMemoryGroups:unregisterBagInGroup(groupName, bagGuid)\r\n    local groups = self:_getGroups()\r\n    local group = groups[groupName]\r\n    if group ~= nil then\r\n        group[bagGuid] = nil\r\n        self:_setGroups(groups)\r\n    end\r\nend\r\n\r\n-- Return the global variable, which is a table holding all memory group names & guids.\r\nfunction GlobalMemoryGroups:_getGroups()\r\n    return Global.getTable(self.NAME_OF_GLOBAL_VARIABLE)\r\nend\r\n\r\n-- Override the global variable (i.e. the entire table).\r\nfunction GlobalMemoryGroups:_setGroups(newTable)\r\n    Global.setTable(self.NAME_OF_GLOBAL_VARIABLE, newTable)\r\nend\r\n\r\n-- Add a new memory group named \"groupName\" to the global variable, if one doesn't already exist.\r\nfunction GlobalMemoryGroups:_tryCreateNewGroup(groupName)\r\n    local groups = self:_getGroups()\r\n    if groups[groupName] == nil then\r\n        groups[groupName] = {}\r\n        self:_setGroups(groups)\r\n    end\r\nend\r\n\r\n\r\n-- This object controls the \"Group Name\" input text field that is part of the bag's ingame UI.\r\ngroupNameInput = {\r\n    greyedOutText = \"Group Name\",\r\n    widthPerCharacter = 100,\r\n    padding = 4,\r\n    memoryBag=self,\r\n}\r\nfunction groupNameInput:create(optionalStartingValue)\r\n    local effectiveText = optionalStartingValue or self.greyedOutText\r\n    local width = self:computeWidth(effectiveText)\r\n\r\n    self.memoryBag.createInput({\r\n        label=self.greyedOutText,\r\n        value=optionalStartingValue or nil,\r\n        alignment=3, -- Center aligned\r\n        input_function=\"groupNameInput_onCharacterTyped\", function_owner=self.memoryBag,\r\n        position={2.1,6,0}, rotation={0,270,0}, width=width, height=350,\r\n        font_size=250, color={0,0,0}, font_color={1,1,1},\r\n    })\r\nend\r\nfunction groupNameInput:computeWidth(text)\r\n    return (string.len(text) + self.padding) * self.widthPerCharacter\r\nend\r\nfunction groupNameInput:updatedWidth(text)\r\n    self.memoryBag.editInput({\r\n        index=0,\r\n        width=self:computeWidth(text)\r\n    })\r\nend\r\nfunction groupNameInput:onCharacterTyped(text, stillEditing)\r\n    if stillEditing then\r\n        self:updatedWidth(text)\r\n    else\r\n        if text == \"\" then\r\n            self:updatedWidth(self.greyedOutText)\r\n        end\r\n    end\r\nend\r\nfunction groupNameInput_onCharacterTyped(memoryBag, playerColor, text, stillEditing)\r\n    groupNameInput:onCharacterTyped(text, stillEditing)\r\nend\r\nfunction groupNameInput:setGroupNameToInputField()\r\n    local inputFields = self.memoryBag.getInputs()\r\n    if inputFields ~= nil then\r\n        -- Get input field 0, which corresponds to the groupNameInput.\r\n        -- Unfortunately \"self.getInputs()\" doesn't return the inputs in a guaranteed order.\r\n        local nameField = nil\r\n        for _,field in ipairs(inputFields) do\r\n            if field.index == 0 then\r\n                nameField = field\r\n            end\r\n        end\r\n\r\n        memoryGroupName:set(nameField.value)\r\n    end\r\nend\r\n\r\n\r\n\r\n\r\n\r\n--//////////////////////////////////////////////////////////////////////////////\r\n\r\n\r\nfunction updateSave()\r\n    local data_to_save = {[\"ml\"]=memoryList,[\"groupName\"]=memoryGroupName:get()}\r\n    saved_data = JSON.encode(data_to_save)\r\n    self.script_state = saved_data\r\nend\r\n\r\nfunction combineMemoryFromBagsWithin()\r\n    local bagObjList = self.getObjects()\r\n    for _, bagObj in ipairs(bagObjList) do\r\n        local data = bagObj.lua_script_state\r\n        if data ~= nil then\r\n            local j = JSON.decode(data)\r\n            if j ~= nil and j.ml ~= nil then\r\n                for guid, entry in pairs(j.ml) do\r\n                    memoryList[guid] = entry\r\n                end\r\n            end\r\n        end\r\n    end\r\nend\r\n\r\nfunction updateMemoryWithMoves()\r\n    memoryList = memoryListBackup\r\n    --get the first transposed object's coordinates\r\n    local obj = getObjectFromGUID(moveGuid)\r\n\r\n    -- p1 is where needs to go, p2 is where it was\r\n    local refObjPos = memoryList[moveGuid].pos\r\n    local deltaPos = findOffsetDistance(obj.getPosition(), refObjPos, nil)\r\n    local movedRotation = obj.getRotation()\r\n    for guid, entry in pairs(memoryList) do\r\n        memoryList[guid].pos.x = entry.pos.x - deltaPos.x\r\n        memoryList[guid].pos.y = entry.pos.y - deltaPos.y\r\n        memoryList[guid].pos.z = entry.pos.z - deltaPos.z\r\n        -- memoryList[guid].rot.x = movedRotation.x\r\n        -- memoryList[guid].rot.y = movedRotation.y\r\n        -- memoryList[guid].rot.z = movedRotation.z\r\n    end\r\n\r\n    --theList[obj.getGUID()] = {\r\n    --    pos={x=round(pos.x,4), y=round(pos.y,4), z=round(pos.z,4)},\r\n    --    rot={x=round(rot.x,4), y=round(rot.y,4), z=round(rot.z,4)},\r\n    --    lock=obj.getLock()\r\n    --}\r\n    moveList = {}\r\nend\r\n\r\nfunction onload(saved_data)\r\n    GlobalMemoryGroups:onLoad(self.getGUID())\r\n    AllMemoryBagsInScene:add(self.getGUID())\r\n\r\n    fresh = true\r\n    if saved_data ~= \"\" then\r\n        local loaded_data = JSON.decode(saved_data)\r\n        --Set up information off of loaded_data\r\n        memoryList = loaded_data.ml\r\n        memoryGroupName:set(loaded_data.groupName)\r\n    else\r\n        --Set up information for if there is no saved saved data\r\n        memoryList = {}\r\n        memoryGroupName:set(nil)\r\n    end\r\n\r\n    moveList = {}\r\n    moveGuid = nil\r\n\r\n    if next(memoryList) == nil then\r\n        createSetupButton()\r\n    else\r\n        fresh = false\r\n        createMemoryActionButtons()\r\n    end\r\nend\r\n\r\n\r\n--Beginning Setup\r\n\r\n\r\n--Make setup button\r\nfunction createSetupButton()\r\n    self.createButton({\r\n        label=\"Setup\", click_function=\"buttonClick_setup\", function_owner=self,\r\n        position={0,6,-2}, rotation={0,180,0}, height=350, width=800,\r\n        font_size=250, color={0,0,0}, font_color={1,1,1}\r\n    })\r\nend\r\n\r\n--Triggered by Transpose button\r\nfunction buttonClick_transpose()\r\n    moveGuid = nil\r\n    broadcastToAll(\"Select one object and move it- all objects will move relative to the new location\", {0.75, 0.75, 1})\r\n    memoryListBackup = duplicateTable(memoryList)\r\n    memoryList = {}\r\n    moveList = {}\r\n    self.clearButtons()\r\n    self.clearInputs()\r\n    createButtonsOnAllObjects(true)\r\n    createSetupActionButtons(true)\r\nend\r\n\r\n--Triggered by setup button,\r\nfunction buttonClick_setup()\r\n    memoryListBackup = duplicateTable(memoryList)\r\n    memoryList = {}\r\n    self.clearButtons()\r\n    self.clearInputs()\r\n    createButtonsOnAllObjects(false)\r\n    createSetupActionButtons(false)\r\nend\r\n\r\nfunction getAllObjectsInMemory()\r\n    local objTable = {}\r\n    local curObj = {}\r\n\r\n    for guid in pairs(memoryListBackup) do\r\n        curObj = getObjectFromGUID(guid)\r\n        table.insert(objTable, curObj)\r\n    end\r\n\r\n    return objTable\r\n    -- return getAllObjects()\r\nend\r\n\r\n--Creates selection buttons on objects\r\nfunction createButtonsOnAllObjects(move)\r\n    buttonIndexMap = {}\r\n    local howManyButtons = 0\r\n\r\n    local objsToHaveButtons = {}\r\n    if move == true then\r\n        objsToHaveButtons = getAllObjectsInMemory()\r\n    else\r\n        objsToHaveButtons = getAllObjects()\r\n    end\r\n\r\n    for _, obj in ipairs(objsToHaveButtons) do\r\n        if obj ~= self then\r\n\t\t\t-- Get object position in local coordinates of self\r\n\t\t\tlocal objPos = self.positionToLocal(obj.getPosition())\r\n            objPos.x = -objPos.x\r\n\r\n            -- Shift Z up so it's relative to the top of the object\r\n            local bounds = obj.getBounds()\r\n            objPos.y = objPos.y + bounds.size.y + 1\r\n\r\n            --Offset rotation of bag\r\n            local rot = self.getRotation()\r\n            rot.y = -rot.y + 180\r\n            --Create function\r\n            local funcName = \"selectButton_\" .. howManyButtons\r\n            local func = function() buttonClick_selection(obj, move) end\r\n            local color = {0.75,0.25,0.25,0.6}\r\n            local colorMove = {0,0,1,0.6}\r\n            if move == true then\r\n                color = colorMove\r\n            end\r\n            self.setVar(funcName, func)\r\n            self.createButton({\r\n                click_function=funcName, function_owner=self,\r\n                position=objPos, rotation=rot, height=1000, width=1000,\r\n                color=color,\r\n            })\r\n            buttonIndexMap[obj.getGUID()] = howManyButtons\r\n            howManyButtons = howManyButtons + 1\r\n        end\r\n    end\r\nend\r\n\r\n--Creates submit and cancel buttons\r\nfunction createSetupActionButtons(move)\r\n    self.createButton({\r\n        label=\"Cancel\", click_function=\"buttonClick_cancel\", function_owner=self,\r\n        position={0,6,-2}, rotation={0,180,0}, height=350, width=1100,\r\n        font_size=250, color={0,0,0}, font_color={1,1,1}\r\n    })\r\n\r\n    self.createButton({\r\n        label=\"Submit\", click_function=\"buttonClick_submit\", function_owner=self,\r\n        position={0,6,-2.8}, rotation={0,180,0}, height=350, width=1100,\r\n        font_size=250, color={0,0,0}, font_color={1,1,1}\r\n    })\r\n\r\n    if move == false then\r\n        self.createButton({\r\n            label=\"Add\", click_function=\"buttonClick_add\", function_owner=self,\r\n            position={0,6,-3.6}, rotation={0,180,0}, height=350, width=1100,\r\n            font_size=250, color={0,0,0}, font_color={0.25,1,0.25}\r\n        })\r\n\r\n        self.createButton({\r\n            label=\"Selection\", click_function=\"editDragSelection\", function_owner=self,\r\n            position={0,6,2}, rotation={0,180,0}, height=350, width=1100,\r\n            font_size=250, color={0,0,0}, font_color={1,1,1}\r\n        })\r\n        groupNameInput:create(memoryGroupName:get())\r\n\r\n        if fresh == false then\r\n            self.createButton({\r\n                label=\"Set New\", click_function=\"buttonClick_setNew\", function_owner=self,\r\n                position={0,6,-4.4}, rotation={0,180,0}, height=350, width=1100,\r\n                font_size=250, color={0,0,0}, font_color={0.75,0.75,1}\r\n            })\r\n            self.createButton({\r\n                label=\"Remove\", click_function=\"buttonClick_remove\", function_owner=self,\r\n                position={0,6,-5.2}, rotation={0,180,0}, height=350, width=1100,\r\n                font_size=250, color={0,0,0}, font_color={1,0.25,0.25}\r\n            })\r\n        end\r\n    end\r\n\r\n    self.createButton({\r\n        label=\"Reset\", click_function=\"buttonClick_reset\", function_owner=self,\r\n        position={-2,6,0}, rotation={0,270,0}, height=350, width=800,\r\n        font_size=250, color={0,0,0}, font_color={1,1,1}\r\n    })\r\nend\r\n\r\n\r\n--During Setup\r\n\r\n\r\n--Checks or unchecks buttons\r\nfunction buttonClick_selection(obj, move)\r\n    local index = buttonIndexMap[obj.getGUID()]\r\n    local colorMove = {0,0,1,0.6}\r\n    local color = {0,1,0,0.6}\r\n\r\n    previousGuid = selectedGuid\r\n    selectedGuid = obj.getGUID()\r\n\r\n    theList = memoryList\r\n    if move == true then\r\n        theList = moveList\r\n        if previousGuid ~= nil and previousGuid ~= selectedGuid then\r\n            local prevObj = getObjectFromGUID(previousGuid)\r\n            prevObj.highlightOff()\r\n            self.editButton({index=previousIndex, color=colorMove})\r\n            theList[previousGuid] = nil\r\n        end\r\n        previousIndex = index\r\n    end\r\n\r\n    if theList[selectedGuid] == nil then\r\n        self.editButton({index=index, color=color})\r\n        --Adding pos/rot to memory table\r\n        local pos, rot = obj.getPosition(), obj.getRotation()\r\n        --I need to add it like this or it won't save due to indexing issue\r\n        theList[obj.getGUID()] = {\r\n            pos={x=round(pos.x,4), y=round(pos.y,4), z=round(pos.z,4)},\r\n            rot={x=round(rot.x,4), y=round(rot.y,4), z=round(rot.z,4)},\r\n            lock=obj.getLock(),\r\n            tint=obj.getColorTint()\r\n        }\r\n        obj.highlightOn({0,1,0})\r\n    else\r\n        color = {0.75,0.25,0.25,0.6}\r\n        if move == true then\r\n            color = colorMove\r\n        end\r\n        self.editButton({index=index, color=color})\r\n        theList[obj.getGUID()] = nil\r\n        obj.highlightOff()\r\n    end\r\nend\r\n\r\nfunction editDragSelection(bagObj, player, remove)\r\n    local selectedObjs = Player[player].getSelectedObjects()\r\n    if not remove then\r\n        for _, obj in ipairs(selectedObjs) do\r\n            local index = buttonIndexMap[obj.getGUID()]\r\n            --Ignore if already in the memory list, or does not have a button\r\n            if index and not memoryList[obj.getGUID()] then\r\n                self.editButton({index=index, color={0,1,0,0.6}})\r\n                --Adding pos/rot to memory table\r\n                local pos, rot = obj.getPosition(), obj.getRotation()\r\n                --I need to add it like this or it won't save due to indexing issue\r\n                memoryList[obj.getGUID()] = {\r\n                    pos={x=round(pos.x,4), y=round(pos.y,4), z=round(pos.z,4)},\r\n                    rot={x=round(rot.x,4), y=round(rot.y,4), z=round(rot.z,4)},\r\n                    lock=obj.getLock(),\r\n                    tint=obj.getColorTint()\r\n                }\r\n                obj.highlightOn({0,1,0})\r\n            end\r\n        end\r\n    else\r\n        for _, obj in ipairs(selectedObjs) do\r\n            local index = buttonIndexMap[obj.getGUID()]\r\n            if index and memoryList[obj.getGUID()] then\r\n                color = {0.75,0.25,0.25,0.6}\r\n                self.editButton({index=index, color=color})\r\n                memoryList[obj.getGUID()] = nil\r\n                obj.highlightOff()\r\n            end\r\n        end\r\n    end\r\nend\r\n\r\n--Cancels selection process\r\nfunction buttonClick_cancel()\r\n    memoryList = memoryListBackup\r\n    moveList = {}\r\n    self.clearButtons()\r\n    self.clearInputs()\r\n    if next(memoryList) == nil then\r\n        createSetupButton()\r\n    else\r\n        createMemoryActionButtons()\r\n    end\r\n    removeAllHighlights()\r\n    broadcastToAll(\"Selection Canceled\", {1,1,1})\r\n    moveGuid = nil\r\nend\r\n\r\n--Saves selections\r\nfunction buttonClick_submit()\r\n    fresh = false\r\n    if next(moveList) ~= nil then\r\n        for guid in pairs(moveList) do\r\n            moveGuid = guid\r\n        end\r\n        if memoryListBackup[moveGuid] == nil then\r\n            broadcastToAll(\"Item selected for moving is not already in memory\", {1, 0.25, 0.25})\r\n        else\r\n            broadcastToAll(\"Moving all items in memory relative to new objects position!\", {0.75, 0.75, 1})\r\n            self.clearButtons()\r\n            self.clearInputs()\r\n            createMemoryActionButtons()\r\n            local count = 0\r\n            for guid in pairs(moveList) do\r\n                moveGuid = guid\r\n                count = count + 1\r\n                local obj = getObjectFromGUID(guid)\r\n                if obj ~= nil then obj.highlightOff() end\r\n            end\r\n            updateMemoryWithMoves()\r\n            updateSave()\r\n            buttonClick_place()\r\n        end\r\n    elseif next(memoryList) == nil and moveGuid == nil then\r\n        memoryList = memoryListBackup\r\n        broadcastToAll(\"No selections made.\", {0.75, 0.25, 0.25})\r\n    end\r\n    combineMemoryFromBagsWithin()\r\n    groupNameInput:setGroupNameToInputField()\r\n    self.clearButtons()\r\n    self.clearInputs()\r\n    createMemoryActionButtons()\r\n    local count = 0\r\n    for guid in pairs(memoryList) do\r\n        count = count + 1\r\n        local obj = getObjectFromGUID(guid)\r\n        if obj ~= nil then obj.highlightOff() end\r\n    end\r\n    broadcastToAll(count..\" Objects Saved\", {1,1,1})\r\n    updateSave()\r\n    moveGuid = nil\r\nend\r\n\r\nfunction combineTables(first_table, second_table)\r\n    for k,v in pairs(second_table) do first_table[k] = v end\r\nend\r\n\r\nfunction buttonClick_add()\r\n    fresh = false\r\n    combineTables(memoryList, memoryListBackup)\r\n    broadcastToAll(\"Adding internal bags and selections to existing memory\", {0.25, 0.75, 0.25})\r\n    combineMemoryFromBagsWithin()\r\n    self.clearButtons()\r\n    self.clearInputs()\r\n    createMemoryActionButtons()\r\n    local count = 0\r\n    for guid in pairs(memoryList) do\r\n        count = count + 1\r\n        local obj = getObjectFromGUID(guid)\r\n        if obj ~= nil then obj.highlightOff() end\r\n    end\r\n    broadcastToAll(count..\" Objects Saved\", {1,1,1})\r\n    updateSave()\r\nend\r\n\r\nfunction buttonClick_remove()\r\n    broadcastToAll(\"Removing Selected Entries From Memory\", {1.0, 0.25, 0.25})\r\n    self.clearButtons()\r\n    self.clearInputs()\r\n    createMemoryActionButtons()\r\n    local count = 0\r\n    for guid in pairs(memoryList) do\r\n        count = count + 1\r\n        memoryListBackup[guid] = nil\r\n        local obj = getObjectFromGUID(guid)\r\n        if obj ~= nil then obj.highlightOff() end\r\n    end\r\n    broadcastToAll(count..\" Objects Removed\", {1,1,1})\r\n    memoryList = memoryListBackup\r\n    updateSave()\r\nend\r\n\r\nfunction buttonClick_setNew()\r\n    broadcastToAll(\"Setting new position relative to items in memory\", {0.75, 0.75, 1})\r\n    self.clearButtons()\r\n    self.clearInputs()\r\n    createMemoryActionButtons()\r\n    local count = 0\r\n    for _, obj in ipairs(getAllObjects()) do\r\n        guid = obj.guid\r\n        if memoryListBackup[guid] ~= nil then\r\n            count = count + 1\r\n            memoryListBackup[guid].pos = obj.getPosition()\r\n            memoryListBackup[guid].rot = obj.getRotation()\r\n            memoryListBackup[guid].lock = obj.getLock()\r\n            memoryListBackup[guid].tint = obj.getColorTint()\r\n        end\r\n    end\r\n    broadcastToAll(count..\" Objects Saved\", {1,1,1})\r\n    memoryList = memoryListBackup\r\n    updateSave()\r\nend\r\n\r\n--Resets bag to starting status\r\nfunction buttonClick_reset()\r\n    fresh = true\r\n    memoryList = {}\r\n    memoryGroupName:set(nil)\r\n    self.clearButtons()\r\n    self.clearInputs()\r\n    createSetupButton()\r\n    removeAllHighlights()\r\n    broadcastToAll(\"Tool Reset\", {1,1,1})\r\n    updateSave()\r\nend\r\n\r\n\r\n--After Setup\r\n\r\n\r\n--Creates recall and place buttons\r\nfunction createMemoryActionButtons()\r\n    self.createButton({\r\n        label=\"Place\", click_function=\"buttonClick_place\", function_owner=self,\r\n        position={0,6,-2}, rotation={0,180,0}, height=350, width=800,\r\n        font_size=250, color={0,0,0}, font_color={1,1,1}\r\n    })\r\n    self.createButton({\r\n        label=\"Recall\", click_function=\"buttonClick_recall\", function_owner=self,\r\n        position={0,6,-2.8}, rotation={0,180,0}, height=350, width=800,\r\n        font_size=250, color={0,0,0}, font_color={1,1,1}\r\n    })\r\n    self.createButton({\r\n        label=\"Setup\", click_function=\"buttonClick_setup\", function_owner=self,\r\n        position={-2,6,0}, rotation={0,270,0}, height=350, width=800,\r\n        font_size=250, color={0,0,0}, font_color={1,1,1}\r\n    })\r\n    self.createButton({\r\n        label=\"Move\", click_function=\"buttonClick_transpose\", function_owner=self,\r\n        position={-2.8,6,0}, rotation={0,270,0}, height=350, width=800,\r\n        font_size=250, color={0,0,0}, font_color={0.75,0.75,1}\r\n    })\r\nend\r\n\r\n--Sends objects from bag/table to their saved position/rotation\r\nfunction buttonClick_place()\r\n    if anyOtherBagsInMyGroupArePlaced() then\r\n        recallOtherBagsInMyGroup()\r\n        Wait.frames(_placeObjects, CONFIG.MEMORY_GROUP.FRAME_DELAY_BEFORE_PLACING_OBJECTS)\r\n    else\r\n        _placeObjects()\r\n    end\r\nend\r\n\r\nfunction _placeObjects()\r\n    local bagObjList = self.getObjects()\r\n    for guid, entry in pairs(memoryList) do\r\n        local obj = getObjectFromGUID(guid)\r\n        --If obj is out on the table, move it to the saved pos/rot\r\n        if obj ~= nil then\r\n            obj.setPositionSmooth(entry.pos)\r\n            obj.setRotationSmooth(entry.rot)\r\n            obj.setLock(entry.lock)\r\n            obj.setColorTint(entry.tint)\r\n        else\r\n            --If obj is inside of the bag\r\n            for _, bagObj in ipairs(bagObjList) do\r\n                if bagObj.guid == guid then\r\n                    local item = self.takeObject({\r\n                        guid=guid, position=entry.pos, rotation=entry.rot, smooth=false\r\n                    })\r\n                    item.setLock(entry.lock)\r\n                    item.setColorTint(entry.tint)\r\n                    break\r\n                end\r\n            end\r\n        end\r\n    end\r\n    self.AssetBundle.playTriggerEffect(1)\r\n    broadcastToAll(\"Objects Placed\", {1,1,1})\r\nend\r\n\r\n--Recalls objects to bag from table\r\nfunction buttonClick_recall()\r\n    for guid, entry in pairs(memoryList) do\r\n        local obj = getObjectFromGUID(guid)\r\n        if obj ~= nil then self.putObject(obj) end\r\n    end\r\n    broadcastToAll(\"Objects Recalled\", {1,1,1})\r\n\tself.AssetBundle.playTriggerEffect(0)\r\nend\r\n\r\n\r\n--Utility functions\r\n\r\n\r\n--Find delta (difference) between 2 x/y/z coordinates\r\nfunction findOffsetDistance(p1, p2, obj)\r\n    local yOffset = 0\r\n    if obj ~= nil then\r\n        local bounds = obj.getBounds()\r\n        yOffset = (bounds.size.y - bounds.offset.y)\r\n    end\r\n    local deltaPos = {}\r\n    deltaPos.x = (p2.x-p1.x)\r\n    deltaPos.y = (p2.y-p1.y) + yOffset\r\n    deltaPos.z = (p2.z-p1.z)\r\n    return deltaPos\r\nend\r\n\r\n--Used to rotate a set of coordinates by an angle\r\nfunction rotateLocalCoordinates(desiredPos, obj)\r\n    local objPos, objRot = obj.getPosition(), obj.getRotation()\r\n    local angle = math.rad(objRot.y)\r\n    local x = desiredPos.x * math.cos(angle) - desiredPos.z * math.sin(angle)\r\n    local z = desiredPos.x * math.sin(angle) + desiredPos.z * math.cos(angle)\r\n    --return {x=objPos.x+x, y=objPos.y+desiredPos.y, z=objPos.z+z}\r\n    return {x=x, y=desiredPos.y, z=z}\r\nend\r\n\r\nfunction rotateMyCoordinates(desiredPos, obj)\r\n    local angle = math.rad(obj.getRotation().y)\r\n    local x = desiredPos.x * math.sin(angle)\r\n    local z = desiredPos.z * math.cos(angle)\r\n    return {x=x, y=desiredPos.y, z=z}\r\nend\r\n\r\n--Coroutine delay, in seconds\r\nfunction wait(time)\r\n    local start = os.time()\r\n    repeat coroutine.yield(0) until os.time() > start + time\r\nend\r\n\r\n--Duplicates a table (needed to prevent it making reference to the same objects)\r\nfunction duplicateTable(oldTable)\r\n    local newTable = {}\r\n    for k, v in pairs(oldTable) do\r\n        newTable[k] = v\r\n    end\r\n    return newTable\r\nend\r\n\r\n--Moves scripted highlight from all objects\r\nfunction removeAllHighlights()\r\n    for _, obj in ipairs(getAllObjects()) do\r\n        obj.highlightOff()\r\n    end\r\nend\r\n\r\n--Round number (num) to the Nth decimal (dec)\r\nfunction round(num, dec)\r\n    local mult = 10^(dec or 0)\r\n    return math.floor(num * mult + 0.5) / mult\r\nend\r\n\r\n\r\n--[[\r\nThis object provides access to a variable stored on the \"Global script\".\r\nThe variable holds the GUIDs for every Utility Memory Bag in the scene.\r\nExample:\r\n{'805ebd', '35cc21', 'fc8886', 'f50264', '5f5f63'}\r\n--]]\r\nAllMemoryBagsInScene = {\r\n    NAME_OF_GLOBAL_VARIABLE = \"_UtilityMemoryBag_AllMemoryBagsInScene\"\r\n}\r\n\r\nfunction AllMemoryBagsInScene:add(guid)\r\n    local guids = Global.getTable(self.NAME_OF_GLOBAL_VARIABLE) or {}\r\n    table.insert(guids, guid)\r\n    Global.setTable(self.NAME_OF_GLOBAL_VARIABLE, guids)\r\nend\r\n\r\nfunction AllMemoryBagsInScene:getGuidList()\r\n    return Global.getTable(self.NAME_OF_GLOBAL_VARIABLE) or {}\r\nend",
-      "LuaScriptState": "{\"ml\":{\"11610b\":{\"lock\":false,\"pos\":{\"x\":-33.4814605712891,\"y\":0.0925395265221596,\"z\":11.4222192764282},\"rot\":{\"x\":0.00812256522476673,\"y\":0.00321354530751705,\"z\":90.2878494262695},\"tint\":{\"a\":1,\"b\":0.717647075653076,\"g\":0,\"r\":0}},\"2ed88f\":{\"lock\":false,\"pos\":{\"x\":12.8356628417969,\"y\":0.0204341858625412,\"z\":35.1115608215332},\"rot\":{\"x\":0.0105725275352597,\"y\":-0.000411058659665287,\"z\":90.0287094116211},\"tint\":{\"a\":1,\"b\":0.0939995720982552,\"g\":0.0999995991587639,\"r\":0.856000006198883}},\"360cf4\":{\"lock\":false,\"pos\":{\"x\":15.8550004959106,\"y\":0.338048249483109,\"z\":46.0550003051758},\"rot\":{\"x\":1.50196365211741E-06,\"y\":179.998992919922,\"z\":-1.59689188876655E-05},\"tint\":{\"a\":1,\"b\":0.393101394176483,\"g\":0,\"r\":1}},\"87d10e\":{\"lock\":false,\"pos\":{\"x\":40.0149993896484,\"y\":0.338046550750732,\"z\":-32.4650001525879},\"rot\":{\"x\":-2.33086393564008E-06,\"y\":270.008972167969,\"z\":9.03172895050375E-06},\"tint\":{\"a\":1,\"b\":0.167999714612961,\"g\":0.700999975204468,\"r\":0.191999733448029}},\"9e796f\":{\"lock\":false,\"pos\":{\"x\":-12.3458766937256,\"y\":0.0206462536007166,\"z\":-34.6091804504395},\"rot\":{\"x\":359.989624023438,\"y\":-0.000256327621173114,\"z\":89.9717102050781},\"tint\":{\"a\":1,\"b\":0.171999603509903,\"g\":0.898000001907349,\"r\":0.904999971389771}},\"beb0bd\":{\"lock\":false,\"pos\":{\"x\":23.0336418151855,\"y\":0.0181706976145506,\"z\":-30.9900321960449},\"rot\":{\"x\":1.95177490240894E-05,\"y\":-0.000207228149520233,\"z\":89.9999160766602},\"tint\":{\"a\":1,\"b\":0.167999595403671,\"g\":0.700999975204468,\"r\":0.191999614238739}},\"dcc294\":{\"lock\":false,\"pos\":{\"x\":-14.3450002670288,\"y\":0.338045448064804,\"z\":-46.0550003051758},\"rot\":{\"x\":-1.63177526246727E-06,\"y\":0.00510026188567281,\"z\":4.29640613219817E-06},\"tint\":{\"a\":1,\"b\":0,\"g\":0.889655292034149,\"r\":1}},\"e037fa\":{\"lock\":true,\"pos\":{\"x\":0.755062401294708,\"y\":-0.15683351457119,\"z\":-0.755134999752045},\"rot\":{\"x\":0.00202339980751276,\"y\":180.060150146484,\"z\":0.00242270459420979},\"tint\":{\"a\":1,\"b\":1,\"g\":1,\"r\":1}},\"e76af1\":{\"lock\":false,\"pos\":{\"x\":-44.5458984375,\"y\":0.338043123483658,\"z\":14.3450002670288},\"rot\":{\"x\":-7.43546536341455E-07,\"y\":90.0007019042969,\"z\":-9.12063910618599E-07},\"tint\":{\"a\":1,\"b\":1,\"g\":0.88498991727829,\"r\":0.0735282823443413}}}}",
+      "LuaScriptState": "{\"ml\":{\"11610b\":{\"lock\":false,\"pos\":{\"x\":-55.9909782409668,\"y\":0.500866055488586,\"z\":-22.2652530670166},\"rot\":{\"x\":-2.44320635829354E-05,\"y\":-2.99947873827477E-06,\"z\":90.0001983642578},\"tint\":{\"a\":1,\"b\":0.717647075653076,\"g\":0,\"r\":0}},\"2ed88f\":{\"lock\":false,\"pos\":{\"x\":-22.0569267272949,\"y\":0.50088632106781,\"z\":56.3761405944824},\"rot\":{\"x\":-1.05035678643617E-05,\"y\":-0.000401429570047185,\"z\":90},\"tint\":{\"a\":1,\"b\":0.0939991548657417,\"g\":0.0999991670250893,\"r\":0.856000006198883}},\"360cf4\":{\"lock\":false,\"pos\":{\"x\":15.8550004959106,\"y\":0.338048130273819,\"z\":46.0550003051758},\"rot\":{\"x\":4.82976656712708E-06,\"y\":179.998992919922,\"z\":4.47362936029094E-06},\"tint\":{\"a\":1,\"b\":0.393100947141647,\"g\":0,\"r\":1}},\"87d10e\":{\"lock\":false,\"pos\":{\"x\":40.0149993896484,\"y\":0.338045805692673,\"z\":-32.4650001525879},\"rot\":{\"x\":-2.01988200387859E-06,\"y\":270.008972167969,\"z\":-7.99964141151577E-07},\"tint\":{\"a\":1,\"b\":0.167999297380447,\"g\":0.700999975204468,\"r\":0.191999316215515}},\"9e796f\":{\"lock\":false,\"pos\":{\"x\":22.6290683746338,\"y\":0.500869750976563,\"z\":-56.423999786377},\"rot\":{\"x\":-1.36953121909755E-06,\"y\":6.92671892466024E-05,\"z\":90.0000076293945},\"tint\":{\"a\":1,\"b\":0.17199918627739,\"g\":0.898000001907349,\"r\":0.904999971389771}},\"beb0bd\":{\"lock\":false,\"pos\":{\"x\":57.1944122314453,\"y\":0.854655802249908,\"z\":25.4353713989258},\"rot\":{\"x\":-0.000161659729201347,\"y\":-0.00203724345192313,\"z\":89.9997711181641},\"tint\":{\"a\":1,\"b\":0.167999178171158,\"g\":0.700999975204468,\"r\":0.191999197006226}},\"dcc294\":{\"lock\":false,\"pos\":{\"x\":-14.3450002670288,\"y\":0.338045299053192,\"z\":-46.0550003051758},\"rot\":{\"x\":-4.37219659943366E-06,\"y\":0.00510034197941422,\"z\":1.42077033160604E-05},\"tint\":{\"a\":1,\"b\":0,\"g\":0.889655292034149,\"r\":1}},\"e037fa\":{\"lock\":true,\"pos\":{\"x\":0.755062401294708,\"y\":-0.15683351457119,\"z\":-0.755134999752045},\"rot\":{\"x\":0.0020234000403434,\"y\":180.060150146484,\"z\":0.00242270482704043},\"tint\":{\"a\":1,\"b\":1,\"g\":1,\"r\":1}},\"e76af1\":{\"lock\":false,\"pos\":{\"x\":-44.5458984375,\"y\":0.338039666414261,\"z\":14.3450002670288},\"rot\":{\"x\":-1.70700423041126E-06,\"y\":90.0007019042969,\"z\":1.23508380056592E-05},\"tint\":{\"a\":1,\"b\":1,\"g\":0.88498991727829,\"r\":0.0735279694199562}}}}",
       "XmlUI": "",
       "ContainedObjects": [
         {
           "GUID": "11610b",
           "Name": "Custom_Assetbundle",
           "Transform": {
-            "posX": -33.4808769,
-            "posY": -0.08183755,
-            "posZ": 11.4221592,
-            "rotX": -1.63926215E-05,
-            "rotY": 0.0117098456,
-            "rotZ": 90.0000839,
+            "posX": -55.99098,
+            "posY": 0.5008571,
+            "posZ": -22.2652531,
+            "rotX": 7.402908E-06,
+            "rotY": -7.047358E-06,
+            "rotZ": 89.9999542,
             "scaleX": 0.2,
             "scaleY": 0.2,
             "scaleZ": 0.2
@@ -20896,12 +20896,12 @@
           "GUID": "2ed88f",
           "Name": "Custom_Assetbundle",
           "Transform": {
-            "posX": 12.835721,
-            "posY": -0.0818213746,
-            "posZ": 35.1115379,
-            "rotX": 1.69706673E-05,
-            "rotY": -0.000398518954,
-            "rotZ": 90.0,
+            "posX": -22.0569267,
+            "posY": 0.5008891,
+            "posZ": 56.37614,
+            "rotX": -1.34601842E-05,
+            "rotY": -0.0004014407,
+            "rotZ": 90.00001,
             "scaleX": 0.2,
             "scaleY": 0.2,
             "scaleZ": 0.2
@@ -20916,8 +20916,8 @@
           },
           "ColorDiffuse": {
             "r": 0.856,
-            "g": 0.09999924,
-            "b": 0.0939992145
+            "g": 0.09999911,
+            "b": 0.0939990953
           },
           "LayoutGroupSortIndex": 0,
           "Value": 0,
@@ -20959,11 +20959,11 @@
           "Name": "Custom_Assetbundle",
           "Transform": {
             "posX": 15.8550005,
-            "posY": 0.33804813,
+            "posY": 0.338040978,
             "posZ": 46.055,
-            "rotX": 4.85826467E-06,
+            "rotX": 9.05362242E-07,
             "rotY": 179.999,
-            "rotZ": 4.32714842E-06,
+            "rotZ": -2.31514114E-05,
             "scaleX": 0.250000417,
             "scaleY": 0.250000417,
             "scaleZ": 0.250000417
@@ -20979,7 +20979,7 @@
           "ColorDiffuse": {
             "r": 1.0,
             "g": 0.0,
-            "b": 0.393101
+            "b": 0.3931009
           },
           "LayoutGroupSortIndex": 0,
           "Value": 0,
@@ -21011,11 +21011,11 @@
           "Name": "Custom_Assetbundle",
           "Transform": {
             "posX": 40.015,
-            "posY": 0.3380458,
+            "posY": 0.338044733,
             "posZ": -32.465,
-            "rotX": -2.01451712E-06,
+            "rotX": -3.41607824E-06,
             "rotY": 270.008972,
-            "rotZ": 1.21843343E-07,
+            "rotZ": 1.2036543E-05,
             "scaleX": 0.250000417,
             "scaleY": 0.250000417,
             "scaleZ": 0.250000417
@@ -21029,9 +21029,9 @@
             "z": 0.0
           },
           "ColorDiffuse": {
-            "r": 0.191999376,
+            "r": 0.191999257,
             "g": 0.701,
-            "b": 0.167999357
+            "b": 0.167999238
           },
           "LayoutGroupSortIndex": 0,
           "Value": 0,
@@ -21062,12 +21062,12 @@
           "GUID": "9e796f",
           "Name": "Custom_Assetbundle",
           "Transform": {
-            "posX": -12.3459339,
-            "posY": -0.08184378,
-            "posZ": -34.6091576,
-            "rotX": 0.000227563432,
-            "rotY": 6.64615945E-05,
-            "rotZ": 90.000145,
+            "posX": 22.6290684,
+            "posY": 0.5008756,
+            "posZ": -56.424,
+            "rotX": -1.31222232E-05,
+            "rotY": 7.09724045E-05,
+            "rotZ": 90.00001,
             "scaleX": 0.2,
             "scaleY": 0.2,
             "scaleZ": 0.2
@@ -21083,7 +21083,7 @@
           "ColorDiffuse": {
             "r": 0.905,
             "g": 0.898,
-            "b": 0.171999246
+            "b": 0.171999127
           },
           "LayoutGroupSortIndex": 0,
           "Value": 0,
@@ -21124,12 +21124,12 @@
           "GUID": "beb0bd",
           "Name": "Custom_Assetbundle",
           "Transform": {
-            "posX": 23.0336418,
-            "posY": -0.08183708,
-            "posZ": -30.9900322,
-            "rotX": -5.2567073E-05,
-            "rotY": -0.0002061539,
-            "rotZ": 90.00006,
+            "posX": 57.1944122,
+            "posY": 0.8546386,
+            "posZ": 25.4353714,
+            "rotX": 9.79317556E-05,
+            "rotY": -0.002046666,
+            "rotZ": 89.9999847,
             "scaleX": 0.2,
             "scaleY": 0.2,
             "scaleZ": 0.2
@@ -21143,9 +21143,9 @@
             "z": 0.0
           },
           "ColorDiffuse": {
-            "r": 0.191999257,
+            "r": 0.191999137,
             "g": 0.701,
-            "b": 0.167999238
+            "b": 0.167999119
           },
           "LayoutGroupSortIndex": 0,
           "Value": 0,
@@ -21187,11 +21187,11 @@
           "Name": "Custom_Assetbundle",
           "Transform": {
             "posX": -14.345,
-            "posY": 0.3380453,
+            "posY": 0.3380452,
             "posZ": -46.055,
-            "rotX": -4.36390974E-06,
-            "rotY": 0.005100343,
-            "rotZ": 1.42765375E-05,
+            "rotX": -7.13129E-06,
+            "rotY": 0.005100341,
+            "rotZ": 3.04057767E-06,
             "scaleX": 0.250000417,
             "scaleY": 0.250000417,
             "scaleZ": 0.250000417
@@ -21241,9 +21241,9 @@
             "posX": 0.7550624,
             "posY": -0.156833515,
             "posZ": -0.755135,
-            "rotX": 0.0020234,
+            "rotX": 0.00202340027,
             "rotY": 180.06015,
-            "rotZ": 0.00242270483,
+            "rotZ": 0.002422705,
             "scaleX": 0.05,
             "scaleY": 0.05,
             "scaleZ": 0.05
@@ -21291,11 +21291,11 @@
           "Name": "Custom_Assetbundle",
           "Transform": {
             "posX": -44.5459,
-            "posY": 0.338039666,
+            "posY": 0.3380402,
             "posZ": 14.345,
-            "rotX": -1.71090358E-06,
+            "rotX": -3.818047E-06,
             "rotY": 90.0007,
-            "rotZ": 1.24068174E-05,
+            "rotZ": 1.67985345E-05,
             "scaleX": 0.250000417,
             "scaleY": 0.250000417,
             "scaleZ": 0.250000417
@@ -21309,7 +21309,7 @@
             "z": 0.0
           },
           "ColorDiffuse": {
-            "r": 0.07352803,
+            "r": 0.07352794,
             "g": 0.8849899,
             "b": 1.0
           },
