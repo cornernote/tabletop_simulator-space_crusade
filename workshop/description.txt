@@ -24,6 +24,7 @@ All missions are pre-setup and stored in a [b]Memory Bag[/b] for quick one-click
 [*][b]12 base missions[/b]
 [*][b]3 missions from the expansion "Mission: Dreadnought"[/b].
 [*][b]4 missions from the expansion "Eldar Attack"[/b].
+[*][b]5 missions from the extension "White Dwarf 145"[/b].
 [*][b]New Mission Kit[/b] to easily create new missions.
 [/list]
 
@@ -37,7 +38,7 @@ All missions are pre-setup and stored in a [b]Memory Bag[/b] for quick one-click
 
 [h2]=== CREDITS AND THANKS ===[/h2]
 
-Content was obtained from the following resources:
+Content was obtained from the following workshop mods:
 
 [list]
 [*] [url=https://steamcommunity.com/sharedfiles/filedetails/?id=1314995431]Space Crusade Complet [FR] by Groule[/url]
@@ -50,12 +51,16 @@ Content was obtained from the following resources:
 [*] [url=https://steamcommunity.com/sharedfiles/filedetails/?id=3450207327]Epic Heresy: Knights and Titans by Gatorboii[/url]
 [*] [url=https://steamcommunity.com/sharedfiles/filedetails/?id=3138821727]Better Notebooks/Notepads by NightStorm[/url]
 [*] [url=https://steamcommunity.com/sharedfiles/filedetails/?id=2454472719]DnD Tools (Mini Injector) by by ColColonCleaner[/url]
-[*] [url=https://steamcommunity.com/sharedfiles/filedetails/?id=1964954970]Battlefield Terrain Pack 5 by Orange Blue Hue[/url]
 [*] [url=https://steamcommunity.com/sharedfiles/filedetails/?id=2960728230]Fog & Steam Effects Animated by dashworth[/url]
 [*] [url=https://steamcommunity.com/sharedfiles/filedetails/?id=2960740403]Spell Pulses Effects Animated by dashworth[/url]
 [*] [url=https://steamcommunity.com/sharedfiles/filedetails/?id=935626975]Lightsabers by ulia[/url]
+[/list]
+
+Images were obtained from the following sites:
+[list]
 [*] [url=https://www.eso.org/public/images/eso0932a/]Background image The Milky Way panorama from ESO/S. Brunier[/url]
-[*] [url=https://e1.pxfuel.com/desktop-wallpaper/92/802/desktop-wallpaper-warhammer-40k-war-hammer-titan.jpg]Alien Token Mat Image[/url]
+[*] [url=https://e1.pxfuel.com/desktop-wallpaper/92/802/desktop-wallpaper-warhammer-40k-war-hammer-titan.jpg]Alien Token Mat[/url]
+[*] [url=https://www.craiyon.com/en/image/-uFz_3MxSvOyQky2ZaVSFA]Mission Landing Pad[/url]
 [/list]
 
 [h2]=== COMPATIBLE MODS ===[/h2]
