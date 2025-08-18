@@ -1,4 +1,5 @@
 --[dnd-measurement-injector]--
+
 function onPickUp(color)
     local gridX = Grid and Grid.sizeX or 2
     local startPos = self.getPosition()
@@ -14,28 +15,33 @@ function onPickUp(color)
             break
         end
     end
+	
+	startPos[2] = startPos[2] + 0.01
 
     local token = spawnObject({
-        type = "Custom_Tile",
+        type = "Custom_Model",
         position = startPos,
-        rotation = {0, Player[color].getPointerRotation(), 0},
+        rotation = {0, 0, 0},
         scale = {gridX / 2.2, 0.1, gridX / 2.2}
     })
 
     token.setLock(true)
     token.setCustomObject({
-        image = "https://steamusercontent-a.akamaihd.net/ugc/1021697601906583980/C63D67188FAD8B02F1B58E17C7B1DB304B7ECBE3/",
-        thickness = 0.1,
-        type = 2
+        type = "coin",
+        mesh = "http://pastebin.com/raw/RBUFj0HE",
+        collider = "http://pastebin.com/raw/bUwzJeWz"
     })
+	token.setColorTint({1, 1, 1})
     token.interactable = false
-
+    token.lock()
     token.createButton({
         click_function = "noop",
         function_owner = self,
-        label = "00",
-        position = {0, 0.1, 0},
-        width = 0, height = 0,
+        label = "0",
+        position = {0, 0.01, 0},
+		font_color = {1, 1, 1},
+        width = 0,
+		height = 0,
         font_size = 600
     })
 
@@ -53,6 +59,7 @@ function onPickUp(color)
 					diff.y = 0
 					local dist = math.max(math.abs(diff.x), math.abs(diff.z)) * (5.0 / gridX)
 					self.editButton({index=0, label=tostring(math.floor((dist+2.5)/5.0))})
+					self.setRotation({0, self.getRotation().y + 1, 0})
                 end
             else
                 -- The object is NOT being held.
