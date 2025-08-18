@@ -54,6 +54,7 @@ Content was obtained from the following workshop mods:
 [*] [url=https://steamcommunity.com/sharedfiles/filedetails/?id=2960728230]Fog & Steam Effects Animated by dashworth[/url]
 [*] [url=https://steamcommunity.com/sharedfiles/filedetails/?id=2960740403]Spell Pulses Effects Animated by dashworth[/url]
 [*] [url=https://steamcommunity.com/sharedfiles/filedetails/?id=935626975]Lightsabers by ulia[/url]
+[*] [url=https://steamcommunity.com/sharedfiles/filedetails/?id=1932424773]3D Modular Tiles, Rooms, Corridors etc by WalBanger -UK-[/url]
 [/list]
 
 Images were obtained from the following sites:
@@ -66,7 +67,6 @@ Images were obtained from the following sites:
 [h2]=== COMPATIBLE MODS ===[/h2]
 
 [list]
-[*] [url=https://steamcommunity.com/sharedfiles/filedetails/?id=948287591]Starry Sky - Particle system by ulia[/url] - use Additive load to get animated star background
 [*] [url=https://steamcommunity.com/sharedfiles/filedetails/?id=2779150680]Giant Spaceships with Interiors! by Potato[/url] - fun toys to play with
 [/list]
 

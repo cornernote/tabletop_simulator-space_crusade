@@ -1,11 +1,9 @@
---[dnd-measurement-injector]--
-
 function onPickUp(color)
     local gridX = Grid and Grid.sizeX or 2
     local startPos = self.getPosition()
 
     for _, hit in ipairs(Physics.cast({
-        origin = self.getBounds().center,
+        origin = self.getBoundsNormalized().center - self.getBoundsNormalized().size,
         direction = {0, -1, 0},
         type = 1,
         max_distance = 10
@@ -51,7 +49,7 @@ function onPickUp(color)
         click_function = "noop",
         function_owner = self,
         label = "0",
-        position = {0, self.getBounds().size.z, 0},
+        position = {0, self.getVisualBoundsNormalized().size.z + 1, 0},
 		font_color = {1, 1, 1},
         width = 0,
 		height = 0,
