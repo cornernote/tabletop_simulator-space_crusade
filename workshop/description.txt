@@ -36,7 +36,6 @@ Bring your campaign to life and relive the classic cooperative and strategic thr
 
 [list]
 [*][b]Move counters[/b] to show how far your units travelled.
-[*][b]Automatic dice rollers[/b] for quick game play.
 [*][b]Camera display[/b] which provides a mini-map on each player's console.
 [/list]
 
@@ -78,6 +77,10 @@ Images were obtained from the following sites:
 
 [list]
 [*] [url=https://github.com/cornernote/tabletop_simulator-space_crusade] Some assets and a copy of the savegame on GitHub[/url]
+[*] [url=https://www.reddit.com/r/SpaceCrusade/comments/1mzh5yg/i_rebuilt_space_crusade_for_tabletop_simulator/]Reddit Post - I rebuilt Space Crusade for Tabletop Simulator[/url]
+[*] [url=https://www.reddit.com/r/SpaceCrusade/]Reddit r/SpaceCrusade[/url]
+
+
 [/list]
 
 [h2]=== COPYRIGHT & ATTRIBUTION ===[/h2]
