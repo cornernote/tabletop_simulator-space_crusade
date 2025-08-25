@@ -4,6 +4,10 @@ Step into the grimdark universe of [b]Space Crusade[/b], now reimagined for [b]T
 
 Fierce creatures like [b]Orks[/b], [b]Genestealers[/b], [b]Chaos Marines[/b], and [b]Androids[/b] stand in your way, while one player takes on the role of the alien adversary, thwarting the mission with cunning strategy and relentless pressure.
 
+[h2]=== WHY SPACE CRUSADE? ===[/h2]
+
+[b]Space Crusade[/b] is one of the best gateways into the [b]Warhammer 40k[/b] universe. It was designed to be faster and more accessible than full-scale Warhammer while still capturing the tactical depth, grimdark setting, and iconic factions. With streamlined rules, clear missions, and recognizable Space Marine chapters, it's an ideal introduction for players curious about Warhammer games but not yet ready to dive into the complexity of tabletop wargaming.
+
 [h2]=== GAME FEATURES ===[/h2]
 
 [list]
@@ -18,7 +22,7 @@ Bring your campaign to life and relive the classic cooperative and strategic thr
 
 [h2]=== INCLUDED MISSIONS ===[/h2]
 
-All missions are pre-setup and stored in a [b]Memory Bag[/b] for quick one-click placement.
+[b]All missions are pre-setup[/b] and stored in a [b]Memory Pod[/b] for quick one-click placement.
 
 [list]
 [*][b]12 base missions[/b]
