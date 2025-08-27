@@ -37,7 +37,12 @@ Bring your campaign to life and relive the classic cooperative and strategic thr
 [list]
 [*][b]Move counters[/b] to show how far your units travelled.
 [*][b]Camera display[/b] which provides a mini-map on each player's console.
+[*][b]Counting bowl[/b] to count the kill points.
 [/list]
+
+[h2]=== LOOKING FOR PLAYERS? ===[/h2]
+
+[b]Join the discord community! - [url=https://discord.gg/z7FwrGqx]https://discord.gg/z7FwrGqx[/url][/b]
 
 [h2]=== CREDITS AND THANKS ===[/h2]
 
@@ -58,13 +63,16 @@ Content was obtained from the following workshop mods:
 [*] [url=https://steamcommunity.com/sharedfiles/filedetails/?id=2960740403]Spell Pulses Effects Animated by dashworth[/url]
 [*] [url=https://steamcommunity.com/sharedfiles/filedetails/?id=935626975]Lightsabers by ulia[/url]
 [*] [url=https://steamcommunity.com/sharedfiles/filedetails/?id=1932424773]3D Modular Tiles, Rooms, Corridors etc by WalBanger -UK-[/url]
+[*] [url=https://steamcommunity.com/sharedfiles/filedetails/?id=946300090]Counting Bowl by MrStump[/url]
 [/list]
 
-Images were obtained from the following sites:
+Content was obtained from the following sites:
+
 [list]
 [*] [url=https://www.eso.org/public/images/eso0932a/]Background image The Milky Way panorama from ESO/S. Brunier[/url]
 [*] [url=https://e1.pxfuel.com/desktop-wallpaper/92/802/desktop-wallpaper-warhammer-40k-war-hammer-titan.jpg]Alien Token Mat[/url]
 [*] [url=https://www.craiyon.com/en/image/-uFz_3MxSvOyQky2ZaVSFA]Mission Landing Pad[/url]
+[*] [url=https://banjogames.wordpress.com/category/boardgames/space-crusade/]House and Solo Rules[/url]
 [/list]
 
 [h2]=== COMPATIBLE MODS ===[/h2]
@@ -79,8 +87,6 @@ Images were obtained from the following sites:
 [*] [url=https://github.com/cornernote/tabletop_simulator-space_crusade] Some assets and a copy of the savegame on GitHub[/url]
 [*] [url=https://www.reddit.com/r/SpaceCrusade/comments/1mzh5yg/i_rebuilt_space_crusade_for_tabletop_simulator/]Reddit Post - I rebuilt Space Crusade for Tabletop Simulator[/url]
 [*] [url=https://www.reddit.com/r/SpaceCrusade/]Reddit r/SpaceCrusade[/url]
-
-
 [/list]
 
 [h2]=== COPYRIGHT & ATTRIBUTION ===[/h2]
