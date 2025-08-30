@@ -4,7 +4,7 @@ function onPickUp(color)
 
     for _, hit in ipairs(Physics.cast({
         origin = self.getBoundsNormalized().center - self.getBoundsNormalized().size,
-        direction = {0, -1, 0},
+        direction = { 0, -1, 0 },
         type = 1,
         max_distance = 10
     })) do
@@ -13,14 +13,14 @@ function onPickUp(color)
             break
         end
     end
-	
-	startPos[2] = startPos[2] + 0.01
+
+    startPos[2] = startPos[2] + 0.01
 
     local spinner = spawnObject({
         type = "Custom_Model",
         position = startPos,
-        rotation = {0, 0, 0},
-        scale = {gridX / 2.2, 0.1, gridX / 2.2}
+        rotation = { 0, 0, 0 },
+        scale = { gridX / 2.2, 0.1, gridX / 2.2 }
     })
 
     spinner.setLock(true)
@@ -29,30 +29,30 @@ function onPickUp(color)
         mesh = "http://pastebin.com/raw/RBUFj0HE",
         collider = "http://pastebin.com/raw/bUwzJeWz"
     })
-	spinner.setColorTint({1, 1, 1})
+    spinner.setColorTint({ 1, 1, 1 })
     spinner.interactable = false
     spinner.lock()
 
     spinner.createButton({
-        click_function = "noop",
+        click_function = "null",
         function_owner = self,
         label = "0",
-        position = {0, 0, 0},
-		font_color = color,
+        position = { 0, 0, 0 },
+        font_color = color,
         width = 0,
-		height = 0,
+        height = 0,
         font_size = 400
     })
 
-	self.clearButtons()
+    self.clearButtons()
     self.createButton({
-        click_function = "noop",
+        click_function = "null",
         function_owner = self,
         label = "0",
-        position = {0, self.getVisualBoundsNormalized().size.z + 1, 0},
-		font_color = {1, 1, 1},
+        position = { 0, self.getVisualBoundsNormalized().size.z + 1, 0 },
+        font_color = { 1, 1, 1 },
         width = 0,
-		height = 0,
+        height = 0,
         font_size = 400
     })
 
@@ -90,17 +90,15 @@ end
 
 local time_of_release = nil
 function onUpdate()
-	if self.held_by_color then
-	    time_of_release = nil
+    if self.held_by_color then
+        time_of_release = nil
     else
-		if time_of_release == nil then
-			time_of_release = os.clock()
-		end
+        if time_of_release == nil then
+            time_of_release = os.clock()
+        end
 
-		if os.clock() - time_of_release >= 5 then
-			self.clearButtons()
-		end
-	end
+        if os.clock() - time_of_release >= 5 then
+            self.clearButtons()
+        end
+    end
 end
-
-function noop() end
