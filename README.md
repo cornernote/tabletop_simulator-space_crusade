@@ -88,12 +88,6 @@ Additional content from:
 
 ---
 
-## 🔗 Compatible Mods
-
-- [Giant Spaceships with Interiors! by Potato](https://steamcommunity.com/sharedfiles/filedetails/?id=2779150680) – fun toys to play with
-
----
-
 ## 📚 Resources
 
 - [Assets and savegame on GitHub](https://github.com/cornernote/tabletop_simulator-space_crusade)
