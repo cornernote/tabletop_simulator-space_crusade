@@ -78,6 +78,7 @@ Content adapted from the following workshop mods:
 - [3D Modular Tiles, Rooms, Corridors etc by WalBanger -UK-](https://steamcommunity.com/sharedfiles/filedetails/?id=1932424773)
 - [Counting Bowl by MrStump](https://steamcommunity.com/sharedfiles/filedetails/?id=946300090)
 - [Dice Counter by Ockman](https://steamcommunity.com/sharedfiles/filedetails/?id=3551983119)
+- [Lighting and Effects by Fenrys](https://steamcommunity.com/sharedfiles/filedetails/?id=1469725554)
 
 Additional content from:
 
