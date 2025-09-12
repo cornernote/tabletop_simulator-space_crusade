@@ -1,7 +1,11 @@
 -- Utility memory bag by Directsun
 -- Version 2.7.0
 -- Fork of Memory Bag 2.0 by MrStump
--- cornernote added animations
+
+-- cornernote changes:
+-- - added animations
+-- - improve button placement for memory pod model
+-- - add context menu to unlock/lock setup buttons for cleaner interface
 --
 -- Want to contribute? Create an issue or fork the code on GitHub and submit a pull request:
 -- https://github.com/sunflowermans/TTS-UtilityMemoryBag
@@ -14,7 +18,6 @@ CONFIG = {
         FRAME_DELAY_BEFORE_PLACING_OBJECTS = 180,
     },
 }
-
 
 --[[ Memory Bag Groups ]]-------------------------------------------------------
 --[[
@@ -175,7 +178,7 @@ function groupNameInput:create(optionalStartingValue)
         value=optionalStartingValue or nil,
         alignment=3, -- Center aligned
         input_function="groupNameInput_onCharacterTyped", function_owner=self.memoryBag,
-        position={2.1,6,0}, rotation={0,270,0}, width=width, height=350,
+        position={3.6,0.5,0}, rotation={0,270,0}, width=width, height=350,
         font_size=250, color={0,0,0}, font_color={1,1,1},
     })
 end
@@ -295,8 +298,29 @@ function onload(saved_data)
         fresh = false
         createMemoryActionButtons()
     end
+
+    self.clearContextMenu()
+    self.addContextMenuItem("Unlock Setup", toggleSetupLock)
 end
 
+local setupLocked = true
+function toggleSetupLock()
+    self.clearContextMenu()
+    if setupLocked then
+        setupLocked = false
+        self.addContextMenuItem("Lock Setup", toggleSetupLock)
+    else
+        setupLocked = true
+        self.addContextMenuItem("Unlock Setup", toggleSetupLock)
+    end
+    self.clearButtons()
+    self.clearInputs()
+    if next(memoryList) == nil then
+        createSetupButton()
+    else
+        createMemoryActionButtons()
+    end
+end
 
 --Beginning Setup
 
@@ -305,7 +329,7 @@ end
 function createSetupButton()
     self.createButton({
         label="Setup", click_function="buttonClick_setup", function_owner=self,
-        position={0,6,-2}, rotation={0,180,0}, height=350, width=800,
+        position={0,0.5,-2}, rotation={0,180,0}, height=350, width=800,
         font_size=250, color={0,0,0}, font_color={1,1,1}
     })
 end
@@ -395,26 +419,26 @@ end
 function createSetupActionButtons(move)
     self.createButton({
         label="Cancel", click_function="buttonClick_cancel", function_owner=self,
-        position={0,6,-2}, rotation={0,180,0}, height=350, width=1100,
+        position={0,0.5,-2.8}, rotation={0,180,0}, height=350, width=1100,
         font_size=250, color={0,0,0}, font_color={1,1,1}
     })
 
     self.createButton({
         label="Submit", click_function="buttonClick_submit", function_owner=self,
-        position={0,6,-2.8}, rotation={0,180,0}, height=350, width=1100,
+        position={0,0.5,-3.6}, rotation={0,180,0}, height=350, width=1100,
         font_size=250, color={0,0,0}, font_color={1,1,1}
     })
 
     if move == false then
         self.createButton({
             label="Add", click_function="buttonClick_add", function_owner=self,
-            position={0,6,-3.6}, rotation={0,180,0}, height=350, width=1100,
+            position={0,0.5,-4.4}, rotation={0,180,0}, height=350, width=1100,
             font_size=250, color={0,0,0}, font_color={0.25,1,0.25}
         })
 
         self.createButton({
             label="Selection", click_function="editDragSelection", function_owner=self,
-            position={0,6,2}, rotation={0,180,0}, height=350, width=1100,
+            position={0,0.5,3.6}, rotation={0,180,0}, height=350, width=1100,
             font_size=250, color={0,0,0}, font_color={1,1,1}
         })
         groupNameInput:create(memoryGroupName:get())
@@ -422,12 +446,12 @@ function createSetupActionButtons(move)
         if fresh == false then
             self.createButton({
                 label="Set New", click_function="buttonClick_setNew", function_owner=self,
-                position={0,6,-4.4}, rotation={0,180,0}, height=350, width=1100,
+                position={0,0.5,-5.2}, rotation={0,180,0}, height=350, width=1100,
                 font_size=250, color={0,0,0}, font_color={0.75,0.75,1}
             })
             self.createButton({
                 label="Remove", click_function="buttonClick_remove", function_owner=self,
-                position={0,6,-5.2}, rotation={0,180,0}, height=350, width=1100,
+                position={0,0.5,-6}, rotation={0,180,0}, height=350, width=1100,
                 font_size=250, color={0,0,0}, font_color={1,0.25,0.25}
             })
         end
@@ -435,7 +459,7 @@ function createSetupActionButtons(move)
 
     self.createButton({
         label="Reset", click_function="buttonClick_reset", function_owner=self,
-        position={-2,6,0}, rotation={0,270,0}, height=350, width=800,
+        position={-3.6,0.5,0}, rotation={0,270,0}, height=350, width=800,
         font_size=250, color={0,0,0}, font_color={1,1,1}
     })
 end
@@ -663,24 +687,26 @@ end
 function createMemoryActionButtons()
     self.createButton({
         label="Place", click_function="buttonClick_place", function_owner=self,
-        position={0,6,-2}, rotation={0,180,0}, height=350, width=800,
+        position={0,0.5,-2.8}, rotation={0,180,0}, height=350, width=800,
         font_size=250, color={0,0,0}, font_color={1,1,1}
     })
     self.createButton({
         label="Recall", click_function="buttonClick_recall", function_owner=self,
-        position={0,6,-2.8}, rotation={0,180,0}, height=350, width=800,
+        position={0,0.5,-3.6}, rotation={0,180,0}, height=350, width=800,
         font_size=250, color={0,0,0}, font_color={1,1,1}
     })
-    self.createButton({
-        label="Setup", click_function="buttonClick_setup", function_owner=self,
-        position={-2,6,0}, rotation={0,270,0}, height=350, width=800,
-        font_size=250, color={0,0,0}, font_color={1,1,1}
-    })
-    self.createButton({
-        label="Move", click_function="buttonClick_transpose", function_owner=self,
-        position={-2.8,6,0}, rotation={0,270,0}, height=350, width=800,
-        font_size=250, color={0,0,0}, font_color={0.75,0.75,1}
-    })
+    if not setupLocked then
+        self.createButton({
+            label="Setup", click_function="buttonClick_setup", function_owner=self,
+            position={0,0.5,-4.4}, rotation={0,180,0}, height=350, width=800,
+            font_size=250, color={0,0,0}, font_color={1,1,1}
+        })
+        self.createButton({
+            label="Move", click_function="buttonClick_transpose", function_owner=self,
+            position={0,0.5,-5.2}, rotation={0,180,0}, height=350, width=800,
+            font_size=250, color={0,0,0}, font_color={0.75,0.75,1}
+        })
+    end
 end
 
 --Sends objects from bag/table to their saved position/rotation
