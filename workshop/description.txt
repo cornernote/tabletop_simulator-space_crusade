@@ -35,14 +35,14 @@ Bring your campaign to life and relive the classic cooperative and strategic thr
 [h2]=== TABLETOP FEATURES ===[/h2]
 
 [list]
-[*][b]Move counters[/b] to show how far your units travelled.
+[*][b]Move counters[/b] to show how far your units traveled.
 [*][b]Camera display[/b] which provides a mini-map on each player's console.
 [*][b]Counting bowl[/b] to count the kill points.
 [/list]
 
 [h2]=== LOOKING FOR PLAYERS? ===[/h2]
 
-[b]Join the discord community! - [url=https://discord.gg/z7FwrGqx]https://discord.gg/z7FwrGqx[/url][/b]
+[b]Join the discord community! - [url=https://discord.gg/urSK6m8zhU]https://discord.gg/urSK6m8zhU[/url][/b]
 
 [h2]=== CREDITS AND THANKS ===[/h2]
 

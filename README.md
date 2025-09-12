@@ -54,7 +54,7 @@ All missions are **pre-setup** and stored in a **Memory Pod** for quick one-clic
 ## 🌌 Looking for Players?
 
 Join the community on **Discord**:  
-👉 [https://discord.gg/z7FwrGqx](https://discord.gg/z7FwrGqx)
+👉 [https://discord.gg/urSK6m8zhU](https://discord.gg/urSK6m8zhU)
 
 ---
 
